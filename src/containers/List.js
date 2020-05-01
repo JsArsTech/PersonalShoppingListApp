@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ListsContext } from '../context/ListsContextProvider';
-import { ItemsContext } from '../context/ItemsContextProvider';
 import SubHeader from '../components/SubHeader';
 import ListItem from '../components/ListItem';
 
@@ -15,18 +13,22 @@ const ListItemWrapper = styled.div`
 const Alert = styled.span`
 	width: 100%;
 	text-align: center;
-`
+`;
 
-const List = ({ lists, listItems, loading = false, 
-	error = false, match, history }) =>
-{
-
-	const items = listItems && listItems.filter(item => item.listId === 
-		parseInt(match.params.id));
+const List = ({ items, loading, error, lists, getItemsRequest,
+	match, history }) =>
+{	
 	const list = lists && lists.find(list => list.id ===
 		parseInt(match.params.id));
 
-	return (
+	React.useEffect(() => {
+		if (!items.length > 0) {
+			getItemsRequest(match.params.id);
+		}
+	}, [items, match.params.id, getItemsRequest]);
+
+
+	return !loading && !error ? (
 		<>
 			{
 				history && list && 
@@ -40,8 +42,8 @@ const List = ({ lists, listItems, loading = false,
 						<ListItem key={item.id} data={item}/>)
 				}
 			</ListItemWrapper>
-		</>
-	);
+		</>		
+	) : (<Alert>{loading ? 'Loading...' : error}</Alert>);
 };
 
 export default List;	

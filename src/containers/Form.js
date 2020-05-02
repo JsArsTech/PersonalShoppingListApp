@@ -18,8 +18,10 @@ const SubmitButton = styled(Button)`
 	margin: 2% 0;
 `;
 
-const Form = ({ addItemRequest, match, history }) => {
-	
+const Form = ({ match, history }) => {	
+
+	const { addItemRequest } = React.useContext(ItemsContext);
+
 	const [title, setTitle] = React.useState('');
 	const [quantity, setQuantity] = React.useState('');
 	const [price, setPrice] = React.useState('');

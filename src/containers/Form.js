@@ -4,6 +4,7 @@ import { ItemsContext } from '../context/ItemsContextProvider';
 import SubHeader from '../components/SubHeader';
 import FormHeader from '../components/FormItem';
 import Button from '../components/Button';
+import FormItem from '../components/FormItem';
 
 const FormWrapper = styled.div`
 	display: flex;
@@ -30,7 +31,7 @@ const Form = ({ addItemRequest, match, history }) => {
 			quantity,
 			price,
 			id: Math.floor(Math.random() * 100),
-			listId: parsetInt(match.params.id)
+			listId: parseInt(match.params.id)
 		});
 		history.goBack();
 	};
@@ -65,7 +66,7 @@ const Form = ({ addItemRequest, match, history }) => {
 						type='number'
 						placeholder='0.00'
 						value={price}
-						handleOnChange={setTitle}
+						handleOnChange={setPrice}
 					/>
 					<SubmitButton>Add Item</SubmitButton>
 				</form>

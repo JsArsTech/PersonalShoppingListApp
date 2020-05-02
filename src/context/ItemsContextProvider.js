@@ -68,7 +68,7 @@ async function postData(dataSource, content) {
 		const dataJSON = await data.json();
 
 		if (dataJSON) {
-			return await ({ data: dataJSON, error; false });
+			return await ({ data: dataJSON, error: false });
 		}
 	}
 	catch (error) {

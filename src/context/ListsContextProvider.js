@@ -32,7 +32,7 @@ const reducer = (value, action) => {
 				list: action.payload,
 				loadng: false
 			};
-		case 'GET_LIST_ERROR:
+		case 'GET_LIST_ERROR':
 			return {
 				...value,
 				list: {},
